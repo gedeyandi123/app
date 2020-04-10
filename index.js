@@ -1,9 +1,12 @@
 const express = require('express')
 const axios = require('axios')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 const PORT = process.env.PORT || 5000
 const app = express()
+
+app.use(cors())
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -25,7 +28,7 @@ app.get('/users', (req, res) => {
 
 app.post('/getUserById', (req, res) => {
   if (!req.body.id) {
-    res.json('No ID found in request body.')
+    res.json('No ID found in reqest body.')
   } else {
     axios
       .get(`https://jsonplaceholder.typicode.com/users/${req.body.id}`)
